@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "tailwindcss/dist/base.css";
+import "styles/globalStyles.css";
+import React from "react";
+import { css } from "styled-components/macro"; //eslint-disable-line
 
-function App() {
+import Landing from "pages/Landing"
+import Edition from "pages/Edition"
+import ArticleView from "pages/article-view"
+
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+export default function App() {
+  // return <AnimationRevealPage disabled></AnimationRevealPage>;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router basename="/">
+      <Switch>
+        <Route path={"/edition/:number/:id"}>
+          <ArticleView />
+        </Route>
+        <Route path={"/edition/:number"}>
+          <Edition />
+        </Route>
+        <Route exact path="/">
+          <Landing />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
-
-export default App;
