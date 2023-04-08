@@ -89,7 +89,7 @@ export default ({
                       <PostDescription>{_.truncate(post.acontent, { 'length': 100 })}</PostDescription>
                       <AuthorInfo>
                         <AuthorTextInfo>
-                          <AuthorName>{post.authorName}</AuthorName>
+                          <AuthorName>{post.author.name}</AuthorName>
                         </AuthorTextInfo>
                       </AuthorInfo>
                     </PostText>
