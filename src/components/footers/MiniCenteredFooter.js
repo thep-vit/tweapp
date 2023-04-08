@@ -56,7 +56,7 @@ export default () => {
             </SocialLink>
           </SocialLinksContainer>
           <CopyrightText>
-            <strong>&copy; Copyright 2020, The Hindu Education Plus Club - VIT. All Rights Reserved. </strong>
+            <strong>&copy; Copyright 2023, The Hindu Education Plus Club - VIT. All Rights Reserved. </strong>
             <br />
           This is a beta version of the app. Bugs are expected. All images are subject to copyright by their respective owners.
           <br />

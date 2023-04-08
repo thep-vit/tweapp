@@ -15,9 +15,9 @@ const HeadingInfoContainer = tw.div`flex flex-col items-center`;
 const HeadingDescription = tw.p`mt-4 font-medium text-gray-600 text-center max-w-sm`;
 
 const Card = tw.div`lg:mx-4 xl:mx-8 max-w-sm lg:max-w-xs`;
-const Image = styled.div(props => [
+const Image = styled.div((props) => [
   `background-image: url("${props.imageSrc}");`,
-  tw`bg-cover bg-center h-80 lg:h-64 rounded`
+  tw`bg-cover bg-center h-80 lg:h-64 rounded`,
 ]);
 const Category = tw.div`mt-4 text-secondary-100 font-bold text-sm`;
 const Title = tw.h4`mt-2 leading-relaxed font-bold text-lg`;
@@ -31,12 +31,12 @@ const DecoratorBlob2 = tw(
 )`-z-10 absolute top-0 left-0 w-48 h-48 transform -translate-x-32 translate-y-full opacity-25`;
 
 export default (props) => {
-  const [Loading, setLoading] = React.useState(true)
+  const [Loading, setLoading] = React.useState(true);
   React.useEffect(() => {
     if (props.editionObj) {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [props.editionObj])
+  }, [props.editionObj]);
 
   return (
     <Container>
@@ -44,23 +44,39 @@ export default (props) => {
         <HeadingInfoContainer>
           <HeadingTitle>News Flash</HeadingTitle>
         </HeadingInfoContainer>
-        {Loading === false &&
+        {Loading === false && (
           <ThreeColumn>
             {props.editionObj.map((post, index) => {
               if (post.atype === "news") {
                 return (
                   <Column key={index}>
                     <Card>
-                      <Image imageSrc={"https://thepc.herokuapp.com/api/articles/" + post._id + "/picture"} />
+                      <Image
+                        imageSrc={
+                          "https://thepc-bknd.onrender.com/api/articles/" +
+                          post._id +
+                          "/picture"
+                        }
+                      />
                       <Title>{post.atitle}</Title>
-                      <Link href={process.env.PUBLIC_URL + "/edition/" + props.enumber + "/" + post._id}>Read Article</Link>
+                      <Link
+                        href={
+                          process.env.PUBLIC_URL +
+                          "/edition/" +
+                          props.enumber +
+                          "/" +
+                          post._id
+                        }
+                      >
+                        Read Article
+                      </Link>
                     </Card>
                   </Column>
-                )
+                );
               }
             })}
           </ThreeColumn>
-        }
+        )}
       </Content>
       <DecoratorBlob1 />
       <DecoratorBlob2 />
