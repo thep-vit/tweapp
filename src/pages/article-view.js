@@ -1,8 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom"
-import _ from "lodash"
-import axios from "axios"
-import qs from "qs"
+import { useParams } from "react-router-dom";
+import _ from "lodash";
+import axios from "axios";
+import qs from "qs";
 import AnimationRevealPage from "helpers/AnimationRevealPage.js";
 import { Container, ContentWithPaddingXl } from "components/misc/Layouts";
 import { SectionDescription } from "components/misc/Typography";
@@ -41,24 +41,29 @@ const Text = styled.div`
 `;
 
 export default () => {
-  const { number, id } = useParams()
-  const [article, setArticle] = React.useState()
-  const [Loading, setLoading] = React.useState(true)
+  const { number, id } = useParams();
+  const [article, setArticle] = React.useState();
+  const [Loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    axios.get("https://thepc.herokuapp.com/api/edition/" + number, qs.stringify({})
-    ).then(response => {
-      setArticle(response.data.articles)
-      setLoading(false)
-    }).catch(error => console.log(error))
-  }, [number])
+    axios
+      .get(
+        "https://thepc-bknd.onrender.com/api/edition/" + number,
+        qs.stringify({})
+      )
+      .then((response) => {
+        setArticle(response.data.articles);
+        setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, [number]);
 
   if (Loading === true) {
     return (
       <AnimationRevealPage>
         <h1>Loading...</h1>
       </AnimationRevealPage>
-    )
+    );
   } else {
     return (
       <AnimationRevealPage>
@@ -68,19 +73,26 @@ export default () => {
             if (post._id === id) {
               return (
                 <ContentWithPaddingXl>
-                  <Subheading> <a href={process.env.PUBLIC_URL + "/edition/" + number}>{"<-- Go Back"} </a></Subheading>
+                  <Subheading>
+                    {" "}
+                    <a href={process.env.PUBLIC_URL + "/edition/" + number}>
+                      {"<-- Go Back"}{" "}
+                    </a>
+                  </Subheading>
                   <br />
                   <Subheading>{_.upperCase(post.atype)}</Subheading>
                   <HeadingRow>
                     <Heading>{post.atitle}</Heading>
                   </HeadingRow>
                   <Text>
-                    <SectionDescription><em>{post.author.name}</em></SectionDescription>
+                    <SectionDescription>
+                      <em>{post.author.name}</em>
+                    </SectionDescription>
                     {/* <p>{post.acontent.split("\n").map(() => <br />) }</p> */}
                     <p style={{ whiteSpace: "pre-wrap" }}>{post.acontent}</p>
                   </Text>
                 </ContentWithPaddingXl>
-              )
+              );
             }
           })}
         </Container>
